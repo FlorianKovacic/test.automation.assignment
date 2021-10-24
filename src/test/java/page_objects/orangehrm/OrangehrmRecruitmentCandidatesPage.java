@@ -32,13 +32,13 @@ public class OrangehrmRecruitmentCandidatesPage extends OrangehrmUserPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	private void switchToIframe() {
+	/*private void switchToIframe() {
 		driver.switchTo().frame(iframe);
-	}
+	}*/
 
-	void switchBackFromIframe() {
+	/*void switchBackFromIframe() {
 		driver.switchTo().defaultContent();
-	}
+	}*/
 
 	private String getNumberOfCandidatesString() {
 		String fullText = candidatesCounter.getText();
@@ -46,43 +46,43 @@ public class OrangehrmRecruitmentCandidatesPage extends OrangehrmUserPage {
 	}
 
 	public int getNumberOfCandidates() {
-		switchToIframe();
+		//switchToIframe();
 		String fullText = getNumberOfCandidatesString();
-		switchBackFromIframe();
+		//switchBackFromIframe();
 		return Integer.parseInt(fullText.substring(fullText.indexOf("of") + 3));
 	}
 
 	public int waitUntilNumberOfCandidatesUpdates() {
-		switchToIframe();
+		//switchToIframe();
 		String outdatedValue = getNumberOfCandidatesString();
 		try {
 			new WebDriverWait(driver, 2).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(candidatesCounter, outdatedValue)));
 		} catch (TimeoutException e) {
 			;
 		}
-		switchBackFromIframe();
+		//switchBackFromIframe();
 		int updatedValue = getNumberOfCandidates();
 		return updatedValue;
 	}
 
 	public OrangehrmAddCandidateForm addCandidate() {
-		switchToIframe();
+		//switchToIframe();
 		addCandidateButton.click();
-		return new OrangehrmAddCandidateForm(driver, this, driver.findElement(By.id("modalAddCandidate")));
+		return new OrangehrmAddCandidateForm(driver/*, this*/, driver.findElement(By.id("modalAddCandidate")));
 	}
 
 	public void selectTopCandidate() {
-		switchToIframe();
+		//switchToIframe();
 		topCandidateCheckbox.click();
-		switchBackFromIframe();
+		//switchBackFromIframe();
 	}
 
 	public void deleteSelectedCandidates() {
-		switchToIframe();
+		//switchToIframe();
 		threeDots.click();
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(deleteCandidateButton)).click();
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(confirmDeletionButton)).click();
-		switchBackFromIframe();
+		//switchBackFromIframe();
 	}
 
 }

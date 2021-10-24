@@ -16,7 +16,7 @@ public class OrangehrmAddCandidateForm {
 
 	protected WebDriver driver;
 
-	private OrangehrmRecruitmentCandidatesPage parentPage;
+	//private OrangehrmRecruitmentCandidatesPage parentPage;
 
 	@FindBy(id = "addCandidate_resume")
 	private WebElement addResumeButton;
@@ -33,9 +33,9 @@ public class OrangehrmAddCandidateForm {
 	@FindBy(id = "saveCandidateButton")
 	private WebElement saveCandidateButton;
 
-	OrangehrmAddCandidateForm(WebDriver driver, OrangehrmRecruitmentCandidatesPage parentPage, WebElement formElement) {
+	OrangehrmAddCandidateForm(WebDriver driver, /* OrangehrmRecruitmentCandidatesPage parentPage,*/ WebElement formElement) {
 		this.driver = driver;
-		this.parentPage = parentPage;
+		//this.parentPage = parentPage;
 		PageFactory.initElements(field -> new DefaultElementLocator(formElement, field), this);
 	}
 
@@ -50,7 +50,7 @@ public class OrangehrmAddCandidateForm {
 		vacancySelect.click();
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(ourVacancyChoice)).click();
 		saveCandidateButton.click();
-		parentPage.switchBackFromIframe();
+		//parentPage.switchBackFromIframe();
 	}
 
 }

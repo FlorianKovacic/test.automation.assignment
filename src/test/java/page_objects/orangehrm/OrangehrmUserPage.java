@@ -18,7 +18,7 @@ public abstract class OrangehrmUserPage {
 
 	private OrangehrmNavigationBar navigation;
 
-	private static String frameId;
+	//private static String frameId;
 
 	OrangehrmUserPage(WebDriver driver) {
 		this.driver = driver;
@@ -35,7 +35,7 @@ public abstract class OrangehrmUserPage {
 		return navigation;
 	}
 
-	private void enterIframe(String frameId) {
+	private void replaceNavigationBar(String frameId) {
 		WebElement iframe = driver.findElement(By.id(frameId));
 		navigationBarElement = null;
 		hamburger = null;
@@ -44,14 +44,15 @@ public abstract class OrangehrmUserPage {
 	}
 
 	public OrangehrmRecruitmentCandidatesPage navigateToRecruitmentCandidates(String frameId) {
-		OrangehrmUserPage.frameId = frameId;
+		//OrangehrmUserPage.frameId = frameId;
 		OrangehrmRecruitmentCandidatesPage result = getNavigation().navigateToRecruitmentCandidates();
-		enterIframe(frameId);
+		replaceNavigationBar(frameId);
+		driver.switchTo().frame(frameId);
 		return result;
 	}
 
 	public OrangehrmLoginPage logOut() {
-		driver.switchTo().frame(frameId);
+		//driver.switchTo().frame(frameId);
 		return getNavigation().logOut();
 	}
 
