@@ -25,12 +25,30 @@ public class OrangehrmNavigationBar {
 		PageFactory.initElements(field -> new DefaultElementLocator(navigationBar, field), this);
 	}
 
+	/**
+	 * Serves as a generalization of navigating to a menu on the side bar.
+	 * 
+	 * @param section
+	 *            The menu that is reached.
+	 * @param displayerLocator
+	 *            The element that opens the menu.
+	 * @param displayLocator
+	 *            The element that indicates whether the menu is currently active.
+	 */
 	private void navigateToSection(WebElement section, UnaryOperator<WebElement> displayerLocator, UnaryOperator<WebElement> displayLocator) {
 		if (!displayLocator.apply(section).getAttribute("class").contains("active")) {
 			displayerLocator.apply(section).click();
 		}
 	}
 
+	/**
+	 * Serves as a generalization of clicking on a menu entry.
+	 * 
+	 * @param section
+	 *            The menu which is the context of this call.
+	 * @param id
+	 *            Id based locator of the entry.
+	 */
 	private void navigateToPage(WebElement section, String id) {
 		WebElement menuItem = section.findElement(By.id(id));
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(menuItem)).click();

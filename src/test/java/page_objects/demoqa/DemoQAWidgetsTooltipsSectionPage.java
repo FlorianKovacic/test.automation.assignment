@@ -21,9 +21,10 @@ public class DemoQAWidgetsTooltipsSectionPage extends DemoQASectionPage {
 	}
 
 	public void hoverAndPrintTooltip() {
+		new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(hoverMeButton));
 		Actions actionProvider = new Actions(driver);
 		actionProvider.moveToElement(hoverMeButton).build().perform();
-		String tooltipText = new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(buttonTooltip)).getText();
+		String tooltipText = new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(buttonTooltip)).getText();
 		System.out.println(tooltipText);
 	}
 

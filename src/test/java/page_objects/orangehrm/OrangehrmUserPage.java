@@ -18,8 +18,6 @@ public abstract class OrangehrmUserPage {
 
 	private OrangehrmNavigationBar navigation;
 
-	//private static String frameId;
-
 	OrangehrmUserPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -44,15 +42,14 @@ public abstract class OrangehrmUserPage {
 	}
 
 	public OrangehrmRecruitmentCandidatesPage navigateToRecruitmentCandidates(String frameId) {
-		//OrangehrmUserPage.frameId = frameId;
 		OrangehrmRecruitmentCandidatesPage result = getNavigation().navigateToRecruitmentCandidates();
+		//switch to and stay on the iframe until leaving the page (logging out)
 		replaceNavigationBar(frameId);
 		driver.switchTo().frame(frameId);
 		return result;
 	}
 
 	public OrangehrmLoginPage logOut() {
-		//driver.switchTo().frame(frameId);
 		return getNavigation().logOut();
 	}
 

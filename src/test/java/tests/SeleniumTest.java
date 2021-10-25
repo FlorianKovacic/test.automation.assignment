@@ -29,7 +29,7 @@ public abstract class SeleniumTest {
 
 	@BeforeEach
 	void createNewWebDriverInstance() {
-		// createNewFirefoxDriverInstance();
+		//createNewFirefoxDriverInstance();
 		createNewChromeDriverInstance();
 	}
 

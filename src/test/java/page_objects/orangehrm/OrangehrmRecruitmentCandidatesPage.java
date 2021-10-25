@@ -32,57 +32,41 @@ public class OrangehrmRecruitmentCandidatesPage extends OrangehrmUserPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	/*private void switchToIframe() {
-		driver.switchTo().frame(iframe);
-	}*/
-
-	/*void switchBackFromIframe() {
-		driver.switchTo().defaultContent();
-	}*/
-
 	private String getNumberOfCandidatesString() {
-		String fullText = candidatesCounter.getText();
+		String fullText = new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(candidatesCounter)).getText();
 		return fullText;
 	}
 
 	public int getNumberOfCandidates() {
-		//switchToIframe();
 		String fullText = getNumberOfCandidatesString();
-		//switchBackFromIframe();
 		return Integer.parseInt(fullText.substring(fullText.indexOf("of") + 3));
 	}
 
+	//Inconvenient wait for the value to update
 	public int waitUntilNumberOfCandidatesUpdates() {
-		//switchToIframe();
 		String outdatedValue = getNumberOfCandidatesString();
 		try {
 			new WebDriverWait(driver, 2).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(candidatesCounter, outdatedValue)));
 		} catch (TimeoutException e) {
 			;
 		}
-		//switchBackFromIframe();
 		int updatedValue = getNumberOfCandidates();
 		return updatedValue;
 	}
 
 	public OrangehrmAddCandidateForm addCandidate() {
-		//switchToIframe();
 		addCandidateButton.click();
-		return new OrangehrmAddCandidateForm(driver/*, this*/, driver.findElement(By.id("modalAddCandidate")));
+		return new OrangehrmAddCandidateForm(driver, driver.findElement(By.id("modalAddCandidate")));
 	}
 
 	public void selectTopCandidate() {
-		//switchToIframe();
 		topCandidateCheckbox.click();
-		//switchBackFromIframe();
 	}
 
 	public void deleteSelectedCandidates() {
-		//switchToIframe();
 		threeDots.click();
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(deleteCandidateButton)).click();
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(confirmDeletionButton)).click();
-		//switchBackFromIframe();
 	}
 
 }

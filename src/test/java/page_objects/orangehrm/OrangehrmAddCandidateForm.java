@@ -16,8 +16,6 @@ public class OrangehrmAddCandidateForm {
 
 	protected WebDriver driver;
 
-	//private OrangehrmRecruitmentCandidatesPage parentPage;
-
 	@FindBy(id = "addCandidate_resume")
 	private WebElement addResumeButton;
 	@FindBy(id = "addCandidate_firstName")
@@ -33,15 +31,14 @@ public class OrangehrmAddCandidateForm {
 	@FindBy(id = "saveCandidateButton")
 	private WebElement saveCandidateButton;
 
-	OrangehrmAddCandidateForm(WebDriver driver, /* OrangehrmRecruitmentCandidatesPage parentPage,*/ WebElement formElement) {
+	OrangehrmAddCandidateForm(WebDriver driver, WebElement formElement) {
 		this.driver = driver;
-		//this.parentPage = parentPage;
 		PageFactory.initElements(field -> new DefaultElementLocator(formElement, field), this);
 	}
 
 	public void fillTheFormAndSubmit() {
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.btn")));
-		addResumeButton.sendKeys(System.getProperty("user.dir") + "/src/test/resources/myWonderfulResume.txt");
+		addResumeButton.sendKeys(System.getProperty("user.dir") + "\\src\\test\\resources\\myWonderfulResume.txt");
 		String firstName = "QA Automation - ";
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(firstNameField)).sendKeys(firstName);
 		String lastName = Calendar.getInstance(Locale.US).getTime().toString();
@@ -50,7 +47,6 @@ public class OrangehrmAddCandidateForm {
 		vacancySelect.click();
 		new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(ourVacancyChoice)).click();
 		saveCandidateButton.click();
-		//parentPage.switchBackFromIframe();
 	}
 
 }

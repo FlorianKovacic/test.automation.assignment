@@ -71,18 +71,22 @@ public class Tests extends SeleniumTest {
 		OrangehrmLoginPage loginPage = new OrangehrmLoginPage(driver);
 		OrangehrmDashboardPage dashboardPage = loginPage.logIn();
 		dashboardPage.waitForThisToLoad();
+
 		OrangehrmRecruitmentCandidatesPage candidatesPage = dashboardPage.navigateToRecruitmentCandidates("noncoreIframe");
 		int previousNumberOfCandidates = candidatesPage.getNumberOfCandidates();
 		System.out.println(previousNumberOfCandidates);
 		OrangehrmAddCandidateForm addCandidateForm = candidatesPage.addCandidate();
 		addCandidateForm.fillTheFormAndSubmit();
+
 		int currentNumberOfCandidates = candidatesPage.getNumberOfCandidates();
 		assertEquals(previousNumberOfCandidates + 1, currentNumberOfCandidates);
 		previousNumberOfCandidates = currentNumberOfCandidates;
+
 		candidatesPage.selectTopCandidate();
 		candidatesPage.deleteSelectedCandidates();
 		currentNumberOfCandidates = candidatesPage.waitUntilNumberOfCandidatesUpdates();
 		assertEquals(previousNumberOfCandidates - 1, currentNumberOfCandidates);
+
 		candidatesPage.logOut();
 	}
 
